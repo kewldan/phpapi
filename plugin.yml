@@ -1,0 +1,11 @@
+name: PHPAPI
+main: PHPAPI.phpapi
+author: Avenger
+website: https://github.com/kewldan/phpapi
+depend: [PermissionsEx]
+description: PHPAPI
+version: 0.2.2
+commands:
+  phpapi:
+    description: Basic commands in the plugin
+    usage: "Usage: /<command> [command]"
