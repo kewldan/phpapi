@@ -1,4 +1,4 @@
-package PHPAPI;
+package phpapi;
 
 import java.util.List;
 import java.util.StringJoiner;
@@ -12,7 +12,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
-public class phpapi extends JavaPlugin {
+import fr.xephi.authme.api.v3.AuthMeApi;
+
+public class main
+
+
+extends JavaPlugin {
 	Logger log = Bukkit.getLogger();
 	String prefix = "[PHP API]";
 	String mc = "phpapi";
@@ -57,13 +62,23 @@ public class phpapi extends JavaPlugin {
 	    			    names.add(String.format("[%s,[%s]]", p.getName(), t.toString())); //[player1, [player1donates]]
 	    			}
 	    			sender.sendMessage(String.format("[[%d, %d],[%s]]", getServer().getMaxPlayers(), getServer().getOnlinePlayers().size(), names.toString())); //[[Max,current],[[player1, [player1donates]],[player2, [player2donates]]]]
+	    		}else if(args[0].equalsIgnoreCase("cp")){
+	    			if(args.length == 3) {
+	    				if(AuthMeApi.getInstance().checkPassword(args[1], args[2])) {
+	    					sender.sendMessage("true");
+	    				}else {
+	    					sender.sendMessage("false");
+	    				}
+	    			}else {
+	    				sender.sendMessage("Usage: /" + mc + " cp <player> <checkpassword>");
+	    			}
 	    		}else {
 	    			sender.sendMessage(prefix + " ERROR unknown command, please see help!"); //Help message
 	    		}
 	    		////////////////
 	    		
 	    	}else{
-	    		sender.sendMessage(prefix + " Plugin help:\n  /" + mc + " gpd <player> -> Get player donate\n  /" + mc + " mon -> Monitoring"); //Help message
+	    		sender.sendMessage(prefix + " Plugin help:\n  /" + mc + " gpd <player> -> Get player donate\n  /" + mc + " mon -> Monitoring\n  /" + mc + " cp <player> <checkpassword>"); //Help message
 	    	}
 	    	return true;
 	    }
